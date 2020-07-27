@@ -11,13 +11,13 @@
       <h1>Data Collection App</h1>
       <p>Please fill the entries to get statistics on height: </p>
 
-      <form action="success.html" method="POST">
+      <form action="{{url_for('success')}}" method="POST">
         <div class="form-row">
           <div class="col">
             <input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
           </div>
           <div class="col">
-            <input type="number" class="form-control" placeholder="Enter Your Height (cm)" name="height" min="1" required>
+            <input type="number" class="form-control" placeholder="Enter Your Height (cm)" name="data" min="1" required>
           </div>
         </div>
         <br>
