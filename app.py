@@ -24,8 +24,15 @@ def index():
 def success():
     if request.method=='POST':
         email=request.form["email"]
-        data=request.form["data"]
-    return render_template("success.html")
+        height=request.form["height"]
+
+        if db.session.query(Data).filter(Data.email==email).count() == 0:
+            data=Data(email,height)
+            db.session.add(data)
+            db.session.commit()
+            return render_template("success.html")
+
+        return render_template("index.html")
 
 if __name__ == '__main__':
     app.debug=True
