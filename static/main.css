@@ -7,3 +7,9 @@ h1 {
   padding: 1%;
   width: 100%;
 }
+
+.message {
+  color: crimson;
+  font-weight: lighter;
+  font-style: italic;
+}

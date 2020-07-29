@@ -32,7 +32,7 @@ def success():
             db.session.commit()
             return render_template("success.html")
 
-        return render_template("index.html")
+        return render_template("index.html",text="Email address already in use! Please enter a new one")
 
 if __name__ == '__main__':
     app.debug=True
