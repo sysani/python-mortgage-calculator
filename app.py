@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from send_email import send_email
+from sqlalchemy.sql import func
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:PGDb512@localhost/py_data'
@@ -28,10 +29,14 @@ def success():
         height=request.form["height"]
 
         if db.session.query(Data).filter(Data.email==email).count() == 0:
-            send_email(email,height)
             data=Data(email,height)
             db.session.add(data)
             db.session.commit()
+
+            height_average=round(db.session.query(func.avg(Data.height)).scalar(),1)
+            count=db.session.query(Data.height).count()
+            send_email(email,height,height_average,count)
+
             return render_template("success.html")
 
         return render_template("index.html",text="Email address already in use! Please enter a new one")
