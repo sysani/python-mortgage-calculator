@@ -13,3 +13,7 @@ h1 {
   font-weight: lighter;
   font-style: italic;
 }
+
+p {
+  padding: 2% 0%;
+}

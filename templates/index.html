@@ -8,20 +8,30 @@
 
   <body>
     <div class="container">
-      <h1>Data Collection App</h1>
-      <p>Please fill the entries to get statistics on height: </p>
+      <h1>Real Estate Mortgage Calculator</h1>
+      <p>Please fill out the form below and the calculator will show you the maximum purchase price that you may qualify for: </p>
       <form action="{{url_for('success')}}" method="POST">
         <div class="form-row">
           <div class="col">
             <input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
           </div>
           <div class="col">
-            <input type="number" class="form-control" placeholder="Enter Your Height (cm)" name="height" min="1" required>
+            <input type="text" autocomplete="shipping locality" class="form-control" placeholder="Enter Your Location (City)" name="location" required>
           </div>
         </div>
 
         <div class="message">
           {{text | safe}}
+        </div>
+        <br>
+
+        <div class="form-row">
+          <div class="col">
+            <input type="number" class="form-control" placeholder="Enter Your Down Payment Amount" name="down"  min="1000" required>
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" placeholder="Enter Your Annual Salary" name="salary" min="10000" required>
+          </div>
         </div>
 
         <br>
