@@ -2,9 +2,12 @@ from send_email import send_email
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from decouple import config
+
+password = config('db-pass')
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:PGDb512@localhost/realestate'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:'+password+'@localhost/realestate'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db=SQLAlchemy(app)
 
