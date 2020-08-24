@@ -25,6 +25,18 @@ class Data(db.Model):
         self.salary=salary
         self.location=location
 
+def get_total(email, location, down, salary):
+    #downpaymnent_avg=round(db.session.query(func.avg(Data.down)).scalar(),1)
+    #salary_avg=round(db.session.query(func.avg(Data.salary)).scalar(),1)
+    #count=db.session.query(Data.email).count()
+
+    dp_total = (down / .05) if down <= 25000 else ((down - 25000) / .1) + 500000
+    salary_total = (((salary / 12 * .30) * 12) * 25)
+
+    total = int(dp_total if (dp_total < salary_total) else salary_total)
+    return total
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -42,15 +54,7 @@ def success():
             db.session.add(data)
             db.session.commit()
 
-            #downpaymnent_avg=round(db.session.query(func.avg(Data.down)).scalar(),1)
-            #salary_avg=round(db.session.query(func.avg(Data.salary)).scalar(),1)
-            down, salary = int(down), int(salary)
-            dp_total = (down / .05) if down <= 25000 else ((down - 25000) / .1) + 500000
-            salary_total = (((salary / 12 * .30) * 12) * 25)
-
-            total = int(dp_total if (dp_total < salary_total) else salary_total)
-
-            #count=db.session.query(Data.email).count()
+            total = get_total(email, location, int(down), int(salary))
             send_email(email,location,down,salary,total)
 
             return render_template("success.html")
