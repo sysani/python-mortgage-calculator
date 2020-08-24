@@ -4,13 +4,14 @@ import smtplib
 
 password = config('api-pass')
 
-def send_email(email, location, down, salary, total):
+def send_email(email, location, down, salary, total, count, downpayment_avg):
     from_email="annie@null.net"
     to_email=email
     subject="Real Estate Data"
     message="With a down payment of $<b>%s</b> and a salary of $<b>%s,</b> " % (down, salary)
-    message+="you could afford a $<b>%s</b> home in %s" % (total, location)
-    #message+="<br>More Information:<br>Average Down Payment:%s<br>Average Salary:%s<br>" % (downpaymnent_avg, salary_avg)
+    message+="you could afford a $<b>%s</b> home in %s<br>" % (total, location)
+    message+="<br><br>More Information<br>Out out %s entries, the average down payment is $%s<br>" % (count, downpayment_avg)
+    #message+="<br>The average salary is $%s<br>" % (salary_avg)
     msg=MIMEText(message, 'html')
     msg['Subject']=subject
     msg['To']=to_email
