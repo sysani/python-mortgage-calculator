@@ -50,8 +50,8 @@ def success():
             db.session.add(data)
             db.session.commit()
 
-            downpayment_avg=round(db.session.query(func.avg(Data.down)).scalar(),1)
-            salary_avg=round(db.session.query(func.avg(Data.salary)).scalar(),1)
+            downpayment_avg=round(db.session.query(func.avg(Data.down)).scalar())
+            salary_avg=round(db.session.query(func.avg(Data.salary)).scalar())
             count=db.session.query(Data.email).count()
 
             total = get_total(email, location, int(down), int(salary))
