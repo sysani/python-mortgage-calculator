@@ -8,8 +8,8 @@ def send_email(email, location, down, salary, total, count, downpayment_avg):
     from_email="annie@null.net"
     to_email=email
     subject="Real Estate Data"
-    message="With a down payment of $<b>%s</b> and a salary of $<b>%s,</b> " % (down, salary)
-    message+="you could afford a $<b>%s</b> home in %s<br>" % (total, location)
+    message="With a down payment of $<b>%s</b> and a salary of $<b>%s,</b> " % ((f"{down:,}"), (f"{salary:,}"))
+    message+="you could afford a $<b>%s</b> home in %s<br>" % ((f"{total:,}"), location)
     message+="<br><br>More Information<br>Out out %s entries, the average down payment is $%s<br>" % (count, (f"{downpayment_avg:,}"))
     #message+="<br>The average salary is $%s<br>" % (salary_avg)
     msg=MIMEText(message, 'html')

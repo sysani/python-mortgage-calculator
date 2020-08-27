@@ -26,6 +26,7 @@ class Data(db.Model):
         self.location=location
 
 def get_total(email, location, down, salary):
+
     dp_total = (down / .05) if down <= 25000 else ((down - 25000) / .1) + 500000
     salary_total = (((salary / 12 * .30) * 12) * 25)
 
@@ -53,8 +54,9 @@ def success():
             downpayment_avg=round(db.session.query(func.avg(Data.down)).scalar())
             salary_avg=round(db.session.query(func.avg(Data.salary)).scalar())
             count=db.session.query(Data.email).count()
+            down, salary = int(down), int(salary)
 
-            total = get_total(email, location, int(down), int(salary))
+            total = get_total(email, location, down, salary)
             send_email(email,location,down,salary,total,count,downpayment_avg)
 
             return render_template("success.html")
